@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        applicationId "org.opencv.samples.imagemanipulations"
+        minSdkVersion 8
+        targetSdkVersion 8
+
+        ndk {
+            moduleName "image_manipulation"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+
+        debug {
+            ndk {
+                debuggable = false
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            aidl.srcDirs = ['src/main/java']
+            jniLibs.srcDirs = ['src/main/libs']
+            assets.srcDirs = ['assets']
+            resources.srcDirs = ['src/main/java']
+        }
+
+    }
+}
+
+dependencies {
+    compile project(':openCVLibrary310')
+}
